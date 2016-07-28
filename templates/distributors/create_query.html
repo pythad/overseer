@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="container">
+	<div class="row mt-60">
+		<form class="col s12" action="" method="post">
+			{% csrf_token %}
+			<div class="fieldWrapper">
+				{{ form.title.errors }}
+				<label class="" for="id_title">Назва:</label>
+				{{ form.title }}
+			</div>                
+			<div class="fieldWrapper">
+				{{ form.query.errors }}
+				<label class="" for="id_query">Запит:</label>
+				{{ form.query }}
+			</div>
+			<div class="fieldWrapper">
+				{{ form.description.errors }}
+				<label class="" for="id_description">Опис:</label>
+				{{ form.description|add_class:'materialize-textarea' }}
+			</div>
+			<div class="center-align">
+				<button class="btn waves-effect waves-light" type="submit">
+					Створити
+				</button>
+			</div>
+		</form>
+	</div>
+</div>	
+{% endblock content %}

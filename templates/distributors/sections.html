@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+	<div class="container">
+		<div class="row mt-60">
+		<h4>Секції</h4>
+			<div class="collection">
+				{% for section in sections %}
+					<li class="collection-item">
+						<div>
+							<a href="{% url 'distributors:section' section.pk %}">{{ section.name }}</a>
+							<a href="{% url 'distributors:delete_section' section.pk %}" class="secondary-content delete_section">
+								<i class="material-icons">delete</i>
+							</a>
+						</div>
+					</li>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endblock content %}

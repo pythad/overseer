@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+	<div class="container">
+		<div class="row mt-60">
+			<h3>{{ section.name }}</h3>
+			<div class="collection">
+				<a href="{% url 'distributors:add_query' %}?section={{ section.pk }}" class="collection-item center-align">Додати запит</a>
+				{% for query in section.section_queries.all %}
+					<a href="{% url 'distributors:query' query.pk %}" class="collection-item">{{ query.title }}</a>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endblock content %}

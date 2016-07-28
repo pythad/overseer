@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+	<div class="row mt-60">
+		<ul class="collection">
+			<li class="collection-item">
+				<h4>
+					{{ distributor.name }}
+					<a href="{% url 'distributors:groups:edit_distributor' distributor.id %}" class="small_a">Відредагувати профіль</a>
+				</h4>
+			</li>
+			<li class="collection-item">
+				{% if distributor.photo_url %}
+				<img id="distributor_photo" class="materialboxed" width="100" src="{{ distributor.photo_url }}">{% endif %}</li>
+			<li class="collection-item">Згадувань: {{ distributor.mentions }}</li>
+			<li class="collection-item">
+				Посилання ВКонтакті:
+				<a href="http://vk.com/public{{ distributor.vk_id }}">http://vk.com/public{{ distributor.vk_id }}</a>
+			</li>
+			<li class="collection-item">
+				Відкрите/Закрите:
+				<span id="distributor_is_closed">
+					{% if distributor.is_closed or distributor.is_closed == 0%}{{ distributor.get_is_closed_display }}{% else %}Unknown{% endif %}
+				</span>
+			</li>
+			<li class="collection-item">
+				Тип:
+				<span id="distributor_type">
+					{% if distributor.type %}{{ distributor.type }}{% else %}Unknown{% endif %}
+				</span>
+			</li>
+			<li class="collection-item">
+				Кількість учасників:
+				<span id="distributor_members_count">
+					{% if distributor.members_count %}{{ distributor.members_count }}{% else %}Unknown{% endif %}
+				</span>
+			</li>
+			<li class="collection-item">
+				Контакти:
+				<span id="distributor_contacts">
+					{% if distributor.contacts %}{{ distributor.contacts }}{% else %}Unknown{% endif %}
+				</span>
+			</li>
+			<li class="collection-item">
+				Опис:
+				<span id="distributor_description">
+					{% if distributor.description %}{{ distributor.description }}{% else %}Unknown{% endif %}
+				</span>
+			</li>
+			<li class="collection-item">Додане: {{ distributor.added }}</li>
+		</ul>
+		<button id="update_group" class="btn waves-effect waves-light" type="submit" name="action">
+			Оновити інформацію <i class="mdi-content-send right"></i>
+		</button>
+	</div>
+</div>
+{% endblock content %}
+{% block js %}
+<script type="text/javascript" src="{% static 'js/d-ajax.js' %}"></script>
+<script>
+	var group_pk = '{{ distributor.pk }}'
+</script>
+{% endblock js %}

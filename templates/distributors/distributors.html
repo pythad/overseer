@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="container">
+	<!-- Dropdown Trigger -->
+	<div class="row mt-60">
+		<a class='dropdown-button btn ibtn left' href='#' data-activates='dropdown1'>Фільтрувати</a>
+
+		<!-- Dropdown Structure -->
+		<ul id='dropdown1' class='dropdown-content'>
+			<li><a id="all_distributors" class="c-pointer">Всі</a></li>
+			<li class="divider"></li>
+			<li><a id="my_favorite" class="c-pointer">Вподобані</a></li>
+			<li class="divider"></li>
+			<li><a id="by_mentions_distributors" class="c-pointer">За згадуваннями</a></li>
+		</ul>
+		<div class="input-field col s6 right no-margin">
+			<input id="search" type="text" class="validate" name="search">
+			<label class="active" for="search">Пошук</label>
+		</div>
+
+	</div>
+	<div id="distributors">
+		{% include "distributors/distributors_list.html" %}
+	</div>
+</div>
+{% endblock content %}
+{% block js %}
+<script type="text/javascript" src="{% static 'js/d-ajax.js' %}"></script>
+{% endblock js %}

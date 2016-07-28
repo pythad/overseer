@@ -1,0 +1,32 @@
+<h4 id="people_anchor">Люди<a href="#groups_anchor" class="small_a"> Групи</a></h4>
+<ul class="collection">
+	{% for distributor in distributors_persons %}
+	<li class="collection-item avatar">
+		{# <img src="{{ distributor.photo_url }}" alt="Photo" class="circle"> #}
+		<span class="title">
+			<a href="{{ distributor.get_absolute_url }}">
+				{{ distributor.name }}{% if distributor.surname %} {{ distributor.surname }}{% endif %}
+			</a>
+		</span>
+		<p>Згадувань: {{ distributor.mentions }}</p>
+		<a data-value='{{ distributor.id }}' class="secondary-content c-pointer favorite_person {% if distributor.favorite %}blue-text{% endif %} "> <i class="mdi-action-grade"></i>
+		</a>
+	</li>
+	{% endfor %}
+</ul>
+<h4 id="groups_anchor">Групи<a href="#people_anchor" class="small_a"> Люди</a></h4>
+<ul class="collection">
+	{% for distributor in distributors_groups %}
+	<li class="collection-item avatar">
+		{# <img src="{{ distributor.photo_url }}" alt="Photo" class="circle"> #}
+		<span class="title">
+			<a href="{{ distributor.get_absolute_url }}">
+				{{ distributor.name }}
+			</a>
+		</span>
+		<p>Згадувань: {{ distributor.mentions }}</p>
+		<a data-value='{{ distributor.id }}' class="secondary-content c-pointer favorite_group {% if distributor.favorite %}blue-text{% endif %} "> <i class="mdi-action-grade"></i>
+		</a>
+	</li>
+	{% endfor %}
+</ul>

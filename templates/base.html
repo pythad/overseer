@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+<head>
+  <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-calable=no"/>
+  <link rel="shortcut icon" type="image/png" href="{% static 'media/site_files/favicon.png' %}"/>
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+{% include "messages.html" %}
+  <header>
+
+    {% block nav %}
+    <nav class='fixed blue-grey darken-3'>
+      <div class="container">
+        <a href="{% url 'distributors:index' %}" class="brand-logo">Overseer</a>
+      </div>
+      <ul id="slide-out" class="side-nav fixed blue-grey darken-3">
+        <li class="logo"><a class="brand-logo" href="{% url 'distributors:index' %}" id="logo-container">
+         <i class='mdi-social-share large white-text'></i>
+       </a></li>
+       {% if user.is_authenticated %}
+       <li class="no-padding">
+        <ul class="collapsible collapsible-accordion white-text">
+          <li class="bold">
+            <a class="collapsible-header white-text">{{ user.username }}<i class="mdi-navigation-arrow-drop-down"></i></a>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="{% url 'account_logout' %}" class="white-text">Вийти</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
+       <li class="no-padding">
+        <ul class="collapsible collapsible-accordion white-text">
+          <li class="bold">
+            <a class="collapsible-header white-text">Запити<i class="mdi-navigation-arrow-drop-down"></i></a>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="{% url 'distributors:add_query' %}" class="white-text">Створити запит</a></li>
+                <li><a href="{% url 'distributors:queries' %}" class="white-text">Усі запити</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
+       <li class="no-padding">
+        <ul class="collapsible collapsible-accordion white-text">
+          <li class="bold">
+            <a class="collapsible-header white-text">Секції<i class="mdi-navigation-arrow-drop-down"></i></a>
+            <div class="collapsible-body">
+              <ul>
+                <li><a href="{% url 'distributors:add_section' %}" class="white-text">Створити секцію</a></li>
+                <li><a href="{% url 'distributors:sections' %}" class="white-text">Усі секції</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <li class="collection-item bold"><a class="white-text" href="{% url 'distributors:distributors' %}">Розповсюджувачі</a></li>
+      {% else %}
+      <li class="bold"><a href="{% url 'account_signup' %}" class="waves-effect waves-teal white-text">Зареєструватися</a></li>
+      <li class="bold"><a href="{% url 'account_login' %}" class="waves-effect waves-teal white-text">Увійти</a></li>      
+      {% endif %}
+    </ul>
+    <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+  </nav>
+  {% endblock nav %}
+</header>
+<main>
+  {% block content %}
+
+  {% endblock content %}
+</main>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+<script type="text/javascript">
+  var GLOBAL_VARS = {
+    staticUrl: '{{ STATIC_URL }}',
+    distributorsByMentionsUrl: '{% url "distributors:by_mentions_distributors" %}',
+    distributorsAllUrl: '{% url "distributors:all_distributors" %}',
+    distributorsMyFavoriteUrl: '{% url "distributors:my_favorite_distributors" %}',
+    distributorsFavoritePersonUrl: '{% url "distributors:people:favorite_distributor" %}',
+    distributorsFavoriteGroupUrl: '{% url "distributors:groups:favorite_distributor" %}',
+    distributorsUpdateGroupUrl: '{% url "distributors:groups:update_distributor" %}',
+    distributorsUpdatePersonUrl: '{% url "distributors:people:update_distributor" %}',
+    distributorsSearchDistUrl: '{% url "distributors:search_dist" %}',
+  }
+</script>
+{% block js %}
+
+{% endblock js %}
+</body>
+
+</html>
+

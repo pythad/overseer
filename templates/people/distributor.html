@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+	<div class="row mt-60">
+		<ul class="collection">
+			<li class="collection-item">
+				<h4>
+					{{ distributor.name }} {% if distributor.surname %}{{ distributor.surname }}{% endif %}
+					<a href="{% url 'distributors:people:edit_distributor' distributor.id %}" class="small_a">Відредагувати профіль</a>
+				</h4>
+			</li>
+			<li class="collection-item">
+				{% if distributor.photo_url %}
+				<img id="distributor_photo" class="materialboxed" width="100" src="{{ distributor.photo_url }}">{% endif %}</li>
+			<li class="collection-item">Згадувань: {{ distributor.mentions }}</li>
+			<li class="collection-item">
+				Посилання ВКонтакті:
+				<a href="http://vk.com/id{{ distributor.vk_id }}">http://vk.com/id{{ distributor.vk_id }}</a>
+			</li>
+			<li class="collection-item">
+				День народження: {% if distributor.bdate %}{{ distributor.bdate }}{% else %}Unknown{% endif %}
+			</li>
+			<li class="collection-item">
+				Адресса: {% if distributor.address %}{{ distributor.address }}{% else %}Unknown{% endif %}
+			</li>
+			<li class="collection-item">
+				Номер телефону: {% if distributor.m_number %}{{ distributor.m_number }}{% else %}Unknown{% endif %}
+			</li>
+			<li class="collection-item">
+				Опис: {% if distributor.description %}{{ distributor.description }}{% else %}Unknown{% endif %}
+			</li>
+			<li class="collection-item">
+				Доданий: {% if distributor.added %}{{ distributor.added }}{% else %}Unknown{% endif %}
+			</li>
+		</ul>
+		<button id="update_person" class="btn waves-effect waves-light" type="submit" name="action">
+			Оновити інформацію <i class="mdi-content-send right"></i>
+		</button>
+		<p>Зустрічався в:</p>
+			<div class="collection">
+				{% for query in in_queries %}
+					<li  class="collection-item">
+						<div>
+							<a href="{% url 'distributors:query' query.pk %}">{{ query.title }}</a>
+						</div>
+					</li>
+				{% endfor %}
+			</div>
+	</div>
+</div>
+{% endblock content %}
+{% block js %}
+<script type="text/javascript" src="{% static 'js/d-ajax.js' %}"></script>
+<script>
+	var person_pk = '{{ distributor.pk }}'
+</script>
+{% endblock js %}

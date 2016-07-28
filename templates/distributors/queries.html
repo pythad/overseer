@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+	<div class="container">
+		<div class="row mt-60">
+			<div class="collection">
+				{% for query in queries %}
+					<li  class="collection-item">
+						<div>
+							<a href="{% url 'distributors:query' query.pk %}">{{ query.title }}</a>
+							<a href="{% url 'distributors:delete_query' query.id %}" class="secondary-content delete_query">
+								<i class="material-icons">delete</i>
+							</a>
+							<span class="right grey-text">{{ query.description|truncatechars:25 }}</span>
+						</div>
+					</li>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endblock content %}
